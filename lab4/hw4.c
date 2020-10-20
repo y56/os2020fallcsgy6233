@@ -8,14 +8,18 @@
 
 int main(int argc, char **argv)
 {
-    int n = 5; 
-    int d = 2;
+    int n; 
+    int d;
     int k;
     int pid;
     int fd = shm_open("posixsm", O_CREAT | O_RDWR, 0666);
     int *p = mmap(NULL, 0x400000,
                   PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     ftruncate(fd, 0x400000);
+    
+    n = atoi(argv[1]);
+    d = atoi(argv[2]);
+
     pid = fork();
 
     if (pid > 0) 
@@ -36,6 +40,7 @@ int main(int argc, char **argv)
         {
             p[k] = k * d;
         }
+        exit(0);
     } else {
         return -1;
     }
