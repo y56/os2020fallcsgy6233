@@ -4,6 +4,10 @@ gcc -o client.out client.c && ./client.out 15 3
 
 gcc -o  hw4_2v2_modified.out  hw4_2v2_modified.c -lrt && gcc -o  ./hw4_2v2_modified.out 
 
+# ref
+
+https://www.cnblogs.com/straight/articles/7660889.html
+
 # instuctions for TA
 
 Update 11/16 2am:
