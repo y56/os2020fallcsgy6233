@@ -16,7 +16,6 @@ int main(int argc, char * argv[]) {
     int sockfd;
     struct sockaddr_in serv_addr;
     char * serv_host = "localhost";
-    // char * serv_host = "127.0.0.1";
     struct hostent * host_ptr;
     int port;
     int buff_size = 0;
@@ -38,7 +37,7 @@ int main(int argc, char * argv[]) {
     
     for (int k = 0; k < (n + 1); k++)
         {
-            printf("k: %d\n", k);
+            // printf("k: %d\n", k);
 
             /* get the address of the host */
             if ((host_ptr = gethostbyname(serv_host)) == NULL) {
@@ -71,6 +70,7 @@ int main(int argc, char * argv[]) {
 
             if (k == n) {
                 snprintf(tmp_k_d, 12, "%d", -1);
+                0;
             } else {
                 snprintf(tmp_k_d, 12, "%d", k * d);
             }
@@ -80,8 +80,16 @@ int main(int argc, char * argv[]) {
 
             close(sockfd);
 
-            microseconds = rand() % 1000000;
-            printf("wait in microseconds: %d\n", microseconds);
-            usleep(microseconds);
+            if (k == n) {
+                0;
+            } else {
+                microseconds = rand() % 1000000;
+                printf("wait in microseconds: %d\n", microseconds);
+                usleep(microseconds);
+            }
+
+            
         }
+    exit(0);
+    // return 0;
 }

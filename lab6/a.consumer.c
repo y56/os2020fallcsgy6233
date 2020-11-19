@@ -1,14 +1,14 @@
-#include <string.h>
-
-#include <stdio.h>
-
-#include <sys/types.h>
-
-#include <sys/socket.h>
-
-#include <netinet/tcp.h>
-
 #include <arpa/inet.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <time.h> 
+#include <unistd.h>
 
 #define SERV_TCP_PORT 8000 /* server's port number */
 #define MAX_SIZE 80
@@ -31,8 +31,13 @@ int main(int argc, char * argv[]) {
     /* open a TCP socket (an Internet stream socket) */
     if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         perror("can't open stream socket");
-        exit(1);
+        return 1;
     }
+
+    // Bind failed: Address already in use
+    // https://stackoverflow.com/questions/24194961/how-do-i-use-setsockoptso-reuseaddr
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int)) < 0)
+    perror("setsockopt(SO_REUSEADDR) failed");
 
     /* bind the local address, so that the cliend can send to server */
     bzero((char * ) & serv_addr, sizeof(serv_addr));
@@ -42,7 +47,7 @@ int main(int argc, char * argv[]) {
 
     if (bind(sockfd, (struct sockaddr * ) & serv_addr, sizeof(serv_addr)) < 0) {
         perror("can't bind local address");
-        exit(1);
+        return 1;
     }
 
     /* listen to the socket */
@@ -62,10 +67,12 @@ int main(int argc, char * argv[]) {
         len = read(newsockfd, string, MAX_SIZE);
         /* make sure it's a proper string */
         string[len] = 0;
-        printf("%s\n", string);
         close(newsockfd);
         if (strcmp(string, string_minus_1)==0) {
             return 0;
+        }
+        else {
+            printf("%s\n", string);
         }
         
     }
