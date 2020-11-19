@@ -1,12 +1,20 @@
 # a)
 socket()  – opens a socket (similar to pipe() )
+
 connect() – connects to a server
+
 bind()    – assigns a particular port number to the
+
 listen()  – listens to connection requests from
+
 accept()  – accepts a connection from client
+
 write()   – writes a buffer to server, just as in file 
+
 read()    – reads a buffer from client, just as in file or pipe writing or pipe reading 
+
 close()   – closes the socket
+
 ## 1. 
 ### Which of the calls above are blocking and which are not? 
 
@@ -40,7 +48,7 @@ close()   – closes the socket
 Indirect.
 
 ## 2. 
-###How would you change your program to communicate between processes in a different machine?
+### How would you change your program to communicate between processes in a different machine?
 
 Client(producer) should use the IP(private or public, depends) of the server(consumer) machine.
 
