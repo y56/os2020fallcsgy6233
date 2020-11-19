@@ -2,6 +2,8 @@
 gcc -o server.out server.c && ./server.out
 gcc -o client.out client.c && ./client.out 15 3
 
+gcc -o  hw4_2v2_modified.out  hw4_2v2_modified.c -lrt && gcc -o  ./hw4_2v2_modified.out 
+
 # instuctions for TA
 
 Update 11/16 2am:

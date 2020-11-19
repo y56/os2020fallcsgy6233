@@ -65,12 +65,12 @@ function main {
     run 13 11 17
 
     echo "-----------------------------"
-    #build b.c -o cs6233_b -lrt
-    #if [[ $BUILD_EC != 0 ]]; then
-    #    return
-    #fi
-    #echo '[Running part b]'
-    #./cs6233_b 5 2
+    build b.c -o cs6233_b -lrt
+    if [[ $BUILD_EC != 0 ]]; then
+        return
+    fi
+    echo '[Running part b]'
+    ./cs6233_b 5 2
 
     rm -r $TEMP_DIR
 }
