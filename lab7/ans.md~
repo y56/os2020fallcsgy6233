@@ -1,0 +1,50 @@
+# (CS-GY6233) Assignment 7
+
+## a) 
+**List three main differences between paging and segmentation**
+
+* Paging has no external fragmentation because all memory has been cut into frames. Frames do not have to be contiguous when being used by a process. Segmentation has no internal fragmentation because we allocate excactly how much we need. In Paging, we have "page" as the smallest unit, while a segment can be arbitrary size (in unit of byte, though).
+* Paging uses a page table with TLB. Segmentation uses Segment tables and do relatively simple (compared with Paging) address translation and bound check by hardware. Segmentation has no such things as page fault, while Paging allow some virtaul addresses to refer to frames not in physical memory.
+* Paging can do more optimization: putting only some part of virtual memory in physical memory, and copy-on-wirte.
+* Paging needs more time to look up since virtual memory space (large table to look up) is larger than the one in Segmentation and since the possibility of page fault.
+
+## b) 
+**In memory paging, why must the page sizes be powers of 2?**
+
+Because we directly use address bits for page indecise and offsets. Left bits as page index and right bits as offset. So number of addresses in a page in 2^(number of bytes represented by offset bit).
+
+## c) 
+**(1 point) In a computer system that supports programs of 512 pages, 128 bytes each, what is the minimum number of bits that can represent virtual addresses of such system?**
+
+512=2^9
+
+128=2^7
+
+ppppppppp bbbbbbb
+
+ans: 9 + 7 = 16
+
+
+## d) 
+**(1 point) In a 32-bit computer system (i.e. has 32 bits of virtual address space) and 1 KB page size, what is the page number of address 74373?**
+
+1KB = 2^10 Bytes
+
+74373(10) = 10010001010000101 (2)
+```
+22                     10
+pppppppppppppppppppppp bbbbbbbbbb
+               1001000 1010000101
+```
+ans: 1001000(2) = 72(10)
+
+## e) 
+**(1 point) In a 32-bit computer system and 8-KB page size, if a process’ size is 2 MB, how many entries are in the page table for such process?**
+
+8 KB = 2^13 bytes
+offset = 19 bits
+page size = 2^13 bytes
+2 MB = 2^21 bytes
+
+ans: 21 - 13 = 8 pages
+
